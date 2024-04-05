@@ -30,8 +30,7 @@ def diagnose_image(uploaded_file, model):
         # Make predictions
         prediction = model.predict(processed_image)
         predicted_class = np.argmax(prediction)
-        class_confidence = prediction[0][predicted_class]
-
+        
         if predicted_class == 0:
             result = "Adenocarcinoma"
         elif predicted_class == 1:
@@ -40,13 +39,16 @@ def diagnose_image(uploaded_file, model):
             result = "Squamous Cell Carcinoma"
         else:
             result = "Normal"
+            # Display diagnosis result
+            st.write("Diagnosis:", ':green[' + result + ']')
+            return
 
         # Display diagnosis result
-        st.write("Diagnosis:", result)
-        st.write("Confidence:", class_confidence)
+        st.write("Diagnosis", ':orange[' + result + ']')
+        return
 
 # Streamlit app
-st.title("Medical Image Diagnosis")
+st.title("NSCLC Diagnosis")
 
 # Load model
 model = load_model()
@@ -59,14 +61,5 @@ if uploaded_file is not None:
     st.image(uploaded_file, caption="Uploaded Image", use_column_width=True)
   
 # Create a horizontal layout for buttons
-col1, col2 = st.columns([1, 1])
-
-# Clear button
-with col1:
-    if st.button("Clear", help="Clear Image", use_container_width=True):
-        clear_image()
-
-# Diagnose button
-with col2:
-    if st.button("Diagnose", help="Perform Diagnosis", use_container_width=True):
-        diagnose_image(uploaded_file, model)
+if st.button("Diagnose", help="Perform Diagnosis", use_container_width=True):
+    diagnose_image(uploaded_file, model)
