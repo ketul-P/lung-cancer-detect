@@ -51,23 +51,59 @@ def diagnose_image(uploaded_file, model):
         return
 
 # Streamlit app
-st.title("NSCLC Diagnosis")
+st.title("NSCLC (Non-Squamous Carcinogenic Lung Cancer) Diagnosis")
 
 # Load model
 model = load_model()
 
+if "selected_image" not in st.session_state:
+    st.session_state.selected_image = None
+
+st.subheader("Try a Sample CT Scan")
+
+samples = [
+    ("sample_images/adenocarcinoma/ct-scan_chest_4.jpg", "Adenocarcinoma"),
+    ("sample_images/large_cell/ct-scan_chest_8.jpg", "Large Cell"),
+    ("sample_images/normal/ct-scan_chest_2.jpg", "Normal"),
+    ("sample_images/squamous/ct-scan_chest_14.jpg", "Squamous Cell")
+]
+
+cols = st.columns(2)
+
+for i, (path, label) in enumerate(samples):
+
+    with cols[i % 2]:
+
+        st.image(path, caption=label, use_container_width=True)
+
+        if st.button(
+            f"Use {label}",
+            key=f"sample_{i}",
+            use_container_width=True
+        ):
+            st.session_state.selected_image = path
+
+st.subheader("Upload your own CT Scan")
+
 # Upload image
 uploaded_file = st.file_uploader("Upload Image", type=["jpg", "jpeg", "png"])
-
-st.write(
-    "Upload a CT scan image to classify whether it is "
-    "Normal, Adenocarcinoma, Large Cell Carcinoma, or Squamous Cell Carcinoma."
-)
 
 # Display uploaded image
 if uploaded_file is not None:
     st.image(uploaded_file, caption="Uploaded Image", use_column_width=True)
-  
+
+image_to_use = uploaded_file
+
+if image_to_use is None:
+    image_to_use = st.session_state.selected_image
+
+if image_to_use is not None:
+    st.image(
+        image_to_use,
+        caption="Selected Image",
+        use_container_width=True
+    )
+
 # Create a horizontal layout for buttons
 if st.button("Diagnose", help="Perform Diagnosis", use_container_width=True):
-    diagnose_image(uploaded_file, model)
+    diagnose_image(image_to_use, model)
