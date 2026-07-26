@@ -54,6 +54,9 @@ def diagnose_image(uploaded_file, model):
 # Streamlit app
 st.title("NSCLC Diagnosis")
 
+with st.bottom:
+    st.caption("Built by Ketul Patel · Revised 2026")
+
 # Load model
 model = load_model()
 
