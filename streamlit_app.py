@@ -109,20 +109,15 @@ if uploaded_file is not None:
 
 image_to_use = uploaded_file
 
-st.subheader("Results")
+if image_to_use is None:
+    image_to_use = st.session_state.selected_image
 
-with st.container(border=True):
-    st.markdown("### Selected Image")
-
-    col1, col2, col3 = st.columns([1, 2, 1])
-
-    with col2:
-        if image_to_use is not None:
-            st.image(image_to_use, width=300)
-
-            if st.button(
-                "Diagnose",
-                use_container_width=True,
-                type="primary"
-            ):
-                diagnose_image(image_to_use, model)
+if image_to_use is not None:
+    st.image(
+        image_to_use,
+        caption="Selected Image",
+        width=300
+    )
+# Create a horizontal layout for buttons
+if st.button("Diagnose", help="Perform Diagnosis", width=120):
+    diagnose_image(image_to_use, model)
