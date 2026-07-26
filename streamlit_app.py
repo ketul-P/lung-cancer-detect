@@ -75,7 +75,16 @@ for i, (path, label) in enumerate(samples):
 
     with cols[i % 2]:
 
-        st.image(path, caption=label, use_container_width=True)
+        with st.container(border=True):
+
+            st.image(
+                path,
+                width=180
+            )
+
+            st.markdown(
+                f"**{label}**"
+            )
 
         if st.button(
             f"Use {label}",
