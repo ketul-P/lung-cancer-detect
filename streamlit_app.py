@@ -59,6 +59,11 @@ model = load_model()
 # Upload image
 uploaded_file = st.file_uploader("Upload Image", type=["jpg", "jpeg", "png"])
 
+st.write(
+    "Upload a CT scan image to classify whether it is "
+    "Normal, Adenocarcinoma, Large Cell Carcinoma, or Squamous Cell Carcinoma."
+)
+
 # Display uploaded image
 if uploaded_file is not None:
     st.image(uploaded_file, caption="Uploaded Image", use_column_width=True)
