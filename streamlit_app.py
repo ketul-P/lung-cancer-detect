@@ -13,7 +13,7 @@ def clear_image():
 
 # Load the model
 def load_model():
-    return tensorflow.keras.models.load_model('best_model1.keras')
+    return tf.keras.models.load_model('best_model1.keras')
 
 # Function to preprocess the image
 def preprocess_image(img):
