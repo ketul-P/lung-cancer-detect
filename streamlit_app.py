@@ -69,7 +69,7 @@ samples = [
     ("sample_images/squamous/ct-scan_chest_" + str(random.randint(13, 15)) + ".png", "Squamous Cell")
 ]
 
-cols = st.columns(2)
+cols = st.columns(2, "xxsmall", "center")
 
 for i, (path, label) in enumerate(samples):
 
@@ -82,16 +82,13 @@ for i, (path, label) in enumerate(samples):
                 width=180
             )
 
-            st.markdown(
-                f"**{label}**"
-            )
+            if st.button(
+                f"Use {label}",
+                key=f"sample_{i}",
+                use_container_width=True
+            ):
 
-        if st.button(
-            f"Use {label}",
-            key=f"sample_{i}",
-            use_container_width=True
-        ):
-            st.session_state.selected_image = path
+                st.session_state.selected_image = path
 
 st.subheader("Upload your own CT Scan")
 
