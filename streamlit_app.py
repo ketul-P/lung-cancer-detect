@@ -75,7 +75,7 @@ for i, (path, label) in enumerate(samples):
 
     with cols[i % 2]:
 
-        with st.container(border=True, height=150,  horizontal_alignment="center", vertical_alignment="center"):
+        with st.container(border=True, height=240,  horizontal_alignment="center", vertical_alignment="center"):
 
             st.image(
                 path,
