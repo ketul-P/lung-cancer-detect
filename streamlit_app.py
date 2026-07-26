@@ -69,7 +69,7 @@ samples = [
     ("sample_images/squamous/ct-scan_chest_" + str(random.randint(13, 15)) + ".png", "Squamous Cell")
 ]
 
-cols = st.columns(2, "xxsmall", "center")
+cols = st.columns(2)
 
 for i, (path, label) in enumerate(samples):
 
