@@ -60,9 +60,13 @@ model = load_model()
 if "selected_image" not in st.session_state:
     st.session_state.selected_image = None
 
-st.markdown("Upload a chest CT scan image or select one of the provided sample images to get started. " \
-            "Click Diagnose to run the AI model, which will analyze the image and predict whether it is Normal or NSCLC (Non-Small Cell Lung Cancer)." \
-            "The prediction and confidence score will be displayed within a few seconds. This demo is intended for educational and research purposes only")
+st.markdown("This project uses a Convolutional Neural Network trained on labeled lung scan images to classify scans for signs of cancer.\n")
+
+st.markdown("""
+### How to use the demo tool - 
+- Upload a chest CT scan image or select one of the provided sample images to get started.
+- Click Diagnose to run the AI model, which will analyze the image and predict whether it is Normal or NSCLC (Non-Small Cell Lung Cancer).
+- The prediction and confidence score will be displayed within a few seconds. This demo is intended for educational and research purposes only""")
 
 st.subheader("Try a Sample CT Scan")
 
@@ -101,7 +105,7 @@ uploaded_file = st.file_uploader("Upload Image", type=["jpg", "jpeg", "png"])
 
 # Display uploaded image
 if uploaded_file is not None:
-    st.image(uploaded_file, caption="Uploaded Image", use_column_width=True)
+    st.image(uploaded_file, caption="Uploaded Image", width = 300)
 
 image_to_use = uploaded_file
 
@@ -112,9 +116,9 @@ if image_to_use is not None:
     st.image(
         image_to_use,
         caption="Selected Image",
-        use_container_width=True
+        width=300
     )
 
 # Create a horizontal layout for buttons
-if st.button("Diagnose", help="Perform Diagnosis", use_container_width=True):
+if st.button("Diagnose", help="Perform Diagnosis", width=120):
     diagnose_image(image_to_use, model)
