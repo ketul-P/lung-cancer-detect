@@ -60,6 +60,10 @@ model = load_model()
 if "selected_image" not in st.session_state:
     st.session_state.selected_image = None
 
+st.markdown("Upload a chest CT scan image or select one of the provided sample images to get started. " \
+            "Click Diagnose to run the AI model, which will analyze the image and predict whether it is Normal or NSCLC (Non-Small Cell Lung Cancer)." \
+            "The prediction and confidence score will be displayed within a few seconds. This demo is intended for educational and research purposes only")
+
 st.subheader("Try a Sample CT Scan")
 
 samples = [
@@ -75,7 +79,7 @@ for i, (path, label) in enumerate(samples):
 
     with cols[i % 2]:
 
-        with st.container(border=True, height=240,  horizontal_alignment="center", vertical_alignment="center"):
+        with st.container(border=True, height=220,  horizontal_alignment="center", vertical_alignment="center"):
 
             st.image(
                 path,
