@@ -1,6 +1,7 @@
 import streamlit as st
 import tensorflow as tf
 import numpy as np
+import random
 
 from tensorflow.keras.preprocessing import image
 from tensorflow.keras.applications.mobilenet_v2 import preprocess_input, decode_predictions
@@ -62,10 +63,10 @@ if "selected_image" not in st.session_state:
 st.subheader("Try a Sample CT Scan")
 
 samples = [
-    ("sample_images/adenocarcinoma/ct-scan_chest_4.png", "Adenocarcinoma"),
-    ("sample_images/large_cell/ct-scan_chest_8.png", "Large Cell"),
-    ("sample_images/normal/ct-scan_chest_2.png", "Normal"),
-    ("sample_images/squamous/ct-scan_chest_14.png", "Squamous Cell")
+    ("sample_images/adenocarcinoma/ct-scan_chest_" + random.randint(4, 6) + ".png", "Adenocarcinoma"),
+    ("sample_images/large_cell/ct-scan_chest_" + random.randint(7, 9) + ".png", "Large Cell"),
+    ("sample_images/normal/ct-scan_chest_"+ random.randint(1,3) +".png", "Normal"),
+    ("sample_images/squamous/ct-scan_chest_" + random.randint(13, 15) + ".png", "Squamous Cell")
 ]
 
 cols = st.columns(2)
@@ -74,7 +75,7 @@ for i, (path, label) in enumerate(samples):
 
     with cols[i % 2]:
 
-        st.image(path, caption=label, width=150)
+        st.image(path, caption=label, use_container_width=True)
 
         if st.button(
             f"Use {label}",
