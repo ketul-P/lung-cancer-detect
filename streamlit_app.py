@@ -51,7 +51,7 @@ def diagnose_image(uploaded_file, model):
         return
 
 # Streamlit app
-st.title("NSCLC (Non-Squamous Carcinogenic Lung Cancer) Diagnosis")
+st.title("NSCLC Diagnosis")
 
 # Load model
 model = load_model()
@@ -74,7 +74,7 @@ for i, (path, label) in enumerate(samples):
 
     with cols[i % 2]:
 
-        st.image(path, caption=label, use_container_width=True)
+        st.image(path, caption=label, width=150)
 
         if st.button(
             f"Use {label}",
