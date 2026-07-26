@@ -62,10 +62,10 @@ if "selected_image" not in st.session_state:
 st.subheader("Try a Sample CT Scan")
 
 samples = [
-    ("sample_images/adenocarcinoma/ct-scan_chest_4.jpg", "Adenocarcinoma"),
-    ("sample_images/large_cell/ct-scan_chest_8.jpg", "Large Cell"),
-    ("sample_images/normal/ct-scan_chest_2.jpg", "Normal"),
-    ("sample_images/squamous/ct-scan_chest_14.jpg", "Squamous Cell")
+    ("sample_images/adenocarcinoma/ct-scan_chest_4.png", "Adenocarcinoma"),
+    ("sample_images/large_cell/ct-scan_chest_8.png", "Large Cell"),
+    ("sample_images/normal/ct-scan_chest_2.png", "Normal"),
+    ("sample_images/squamous/ct-scan_chest_14.png", "Squamous Cell")
 ]
 
 cols = st.columns(2)
