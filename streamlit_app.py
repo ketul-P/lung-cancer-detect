@@ -63,10 +63,10 @@ if "selected_image" not in st.session_state:
 st.markdown("This project uses a Convolutional Neural Network trained on labeled lung scan images to classify scans for signs of cancer.\n")
 
 st.markdown("""
-### How to use the demo tool - 
+### How to use the demo tool
 - Upload a chest CT scan image or select one of the provided sample images to get started.
 - Click Diagnose to run the AI model, which will analyze the image and predict whether it is Normal or NSCLC (Non-Small Cell Lung Cancer).
-- The prediction and confidence score will be displayed within a few seconds. This demo is intended for educational and research purposes only""")
+- The prediction will be displayed within a few seconds!""")
 
 st.subheader("Try a Sample CT Scan")
 
@@ -109,16 +109,20 @@ if uploaded_file is not None:
 
 image_to_use = uploaded_file
 
-if image_to_use is None:
-    image_to_use = st.session_state.selected_image
+st.subheader("Results")
 
-if image_to_use is not None:
-    st.image(
-        image_to_use,
-        caption="Selected Image",
-        width=300
-    )
+with st.container(border=True):
+    st.markdown("### Selected Image")
 
-# Create a horizontal layout for buttons
-if st.button("Diagnose", help="Perform Diagnosis", width=120):
-    diagnose_image(image_to_use, model)
+    col1, col2, col3 = st.columns([1, 2, 1])
+
+    with col2:
+        if image_to_use is not None:
+            st.image(image_to_use, width=300)
+
+            if st.button(
+                "Diagnose",
+                use_container_width=True,
+                type="primary"
+            ):
+                diagnose_image(image_to_use, model)
